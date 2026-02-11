@@ -10,14 +10,16 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Print Welcome message
-        run: echo "Hello World from Github actions! Abdulwahab"
 
+      
       - name: checkout
         uses: actions/checkout@v5.0.0
 
-      - name: list files
-        run: ls
+      - name: Print Welcome message
+        run: | 
+          echo "Hello World from Github actions! Abdulwahab"
+          ls -ltra
+          cat README.md
 
-      - name: read file
-        run: cat README.md
+
+      
