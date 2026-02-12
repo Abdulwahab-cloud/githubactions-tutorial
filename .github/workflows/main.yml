@@ -6,20 +6,28 @@ on:
       - main
 
 jobs:
-  example-job:
+  welcome-file:
     runs-on: ubuntu-latest
 
     steps:
+      - name: write welcome message
+        run: echo "Hello World from Github actions! Abdulwahab" >> welcome-message.txt
+       
 
-      
-      - name: checkout
-        uses: actions/checkout@v5.0.0
+  list-files:
+    needs: welcome-file
+    runs-on: ubuntu-latest
 
-      - name: Print Welcome message
-        run: |
-          chmod +x shell.sh
-          ./shell.sh
-          
+    steps:
+      - name: list files in details
+        run: ls -ltra
+
+  read-file:
+    needs: list-files
+    runs-on: ubuntu-latest
+    steps:
+      - name: read welcome message file
+        run: cat welcome-message.txt
 
 
       

@@ -1,5 +1,5 @@
-echo "Hello World from Github actions! Abdulwahab"
+echo "Hello World from Github actions! Abdulwahab" >> welcome-message.txt
 
 ls -ltra
 
-cat README.md
+cat welcome-message.txt
