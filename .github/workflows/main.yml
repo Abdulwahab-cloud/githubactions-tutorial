@@ -17,8 +17,8 @@ jobs:
 
       - name: Print Welcome message
         run: |
-          chmod +x shell-script.sh
-          .github/workflows/shell-script.sh
+          chmod +x shell.sh
+          ./shell.sh
           
 
 
