@@ -3,6 +3,10 @@ name: First Workflow
 on:
   workflow_dispatch: 
 
+concurrency: 
+  group: test concurrency
+  cancel-in-progress: false
+
 jobs:
   welcome-file:
     runs-on: ubuntu-latest
