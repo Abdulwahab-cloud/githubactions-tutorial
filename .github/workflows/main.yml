@@ -2,41 +2,23 @@ name: First Workflow
 
 on:
   push: 
+  workflow_dispatch: 
 
-concurrency: 
-  group: test concurrency
-  cancel-in-progress: false
 
 jobs:
   welcome-file:
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: write welcome message
-        run: echo "Hello World from Github actions! Abdulwahab" >> welcome-message.txt
-      
-      - name: upload-artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: welcome artifact
-          path: welcome-message.txt
-
-
-  read-file:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, ubuntu-20.04]
+        images: [hello-world, alpine]
     
-    needs: welcome-file
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
+
     steps:
-      - name: download-artifact
-        uses: actions/download-artifact@v5
-        with:
-          name: welcome artifact
-
-      - name: read welcome message file
-        timeout-minutes: 1
-        run: |
-            cat welcome-message.txt
-            sleep 600s
-
+      - name: Print Docker info
+        run: docker info
+      
+      - name: Run Docker ${{ matrix.images }}
+        run: docker run ${{ matrix.images }}
 
       
