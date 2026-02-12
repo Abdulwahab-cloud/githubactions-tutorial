@@ -11,6 +11,9 @@ jobs:
       matrix:
         os: [ubuntu-latest, ubuntu-20.04]
         images: [hello-world, alpine]
+        exclude:
+          - images: alpine
+            os: ubuntu-20.04
     
     runs-on: ${{ matrix.os }}
 
@@ -18,7 +21,7 @@ jobs:
       - name: Print Docker info
         run: docker info
       
-      - name: Run Docker ${{ matrix.images }}
+      - name: Run Docker ${{ matrix.os }}
         run: docker run ${{ matrix.images }}
 
       
