@@ -1,7 +1,7 @@
 name: First Workflow
 
 on:
-  workflow_dispatch: 
+  push: 
 
 concurrency: 
   group: test concurrency
@@ -23,6 +23,7 @@ jobs:
 
 
   read-file:
+    
     needs: welcome-file
     runs-on: ubuntu-latest
     steps:
@@ -32,7 +33,10 @@ jobs:
           name: welcome artifact
 
       - name: read welcome message file
-        run: cat welcome-message.txt
+        timeout-minutes: 1
+        run: |
+            cat welcome-message.txt
+            sleep 600s
 
 
       
